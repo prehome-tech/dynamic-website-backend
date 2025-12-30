@@ -4,12 +4,29 @@ import Blog from "../models/Blog.js";
 const router = express.Router();
 
 // Get all blogs
+// router.get("/", async (req, res) => {
+//   try {
+//     const blogs = await Blog.find();
+//     res.json(blogs);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
+
 router.get("/", async (req, res) => {
+  console.log(" Blog request received at /api/blogs");
   try {
+    // Check if Blog model is initialized correctly
+    if (!Blog) {
+        return res.status(500).json({ error: "Blog model not initialized" });
+    }
+    
     const blogs = await Blog.find();
+    console.log(`✅ Found ${blogs.length} blogs`);
     res.json(blogs);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  } catch (err) {
+    console.error("❌ Error fetching blogs:", err.message);
+    res.status(500).json({ message: err.message });
   }
 });
 

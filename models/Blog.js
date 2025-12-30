@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import { blogDB } from "../config/db.js";
+import mongoose from "mongoose";
 
 const subttileSectionSchema = new mongoose.Schema({
   beforeContent: { type: String, default: "" },
@@ -72,9 +72,9 @@ const blogSchema = new mongoose.Schema({
 });
 
 // const Blog = mongoose.model("Blog", blogSchema, "dynamic_blogs");
-
-// export default Blog;
-export default blogDB.model('Blog', blogSchema);
+const Blog = blogDB.model("Blog", blogSchema, "dynamic_blogs");
+export default Blog;
+// export default blogDB.model('Blog', blogSchema);
 
 
 
