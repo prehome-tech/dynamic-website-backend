@@ -63,7 +63,7 @@ const BuyerWaitlistLead = formsDB.model('BuyerWaitlistLead', new mongoose.Schema
   otherLocation: String,
   selectedLayout: String,
   otherLayout: String,
-  source: { type: String, default: 'direct' }, 
+  source: { type: String, default: 'Main Website' }, 
   createdAt: { type: Date, default: Date.now },
 }, { collection: 'waitlist_leads', strict: false }));
 
@@ -79,7 +79,7 @@ app.get('/health', (req, res) => {
 app.use("/api/blogs", blogRoutes); 
 
 // Route: General Lead form
-app.post('/submit-form', async (req, res) => {
+app.post('/api/submit-form', async (req, res) => {
   try {
     const newLead = new Lead(req.body);
     await newLead.save();
@@ -90,7 +90,7 @@ app.post('/submit-form', async (req, res) => {
 });
 
 // Route: Appointment form
-app.post('/submit-appointment', async (req, res) => {
+app.post('/api/submit-appointment', async (req, res) => {
   try {
     const newAppointment = new Appointment(req.body);
     await newAppointment.save();
@@ -101,7 +101,7 @@ app.post('/submit-appointment', async (req, res) => {
 });
 
 // Route: Waitlist form
-app.post('/submit-waitlist', async (req, res) => {
+app.post('/api/submit-waitlist', async (req, res) => {
   try {
     const newWaitlist = new BuyerWaitlistLead(req.body);
     await newWaitlist.save();
